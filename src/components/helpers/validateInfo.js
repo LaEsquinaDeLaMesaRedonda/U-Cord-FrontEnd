@@ -7,7 +7,7 @@ const validateInfo = values => {
 
     //Email
     if( !email ) errors.email = "Correo obligatorio";
-    else if ( !regularExp.test(email) ) errors.email = "Correo invalido";
+    else if ( !regularExp.test(email) ) errors.email = "Correo invalido, el correo no tiene el dominio .escuelaing.edu.co o no es un correo valido";
 
     //Passwd
     if ( password.length < 5 ) errors.password = "Contraseña debe ser minimo de 5 caracteres";

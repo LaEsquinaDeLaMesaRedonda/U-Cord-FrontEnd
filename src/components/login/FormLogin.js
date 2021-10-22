@@ -2,10 +2,14 @@ import React from 'react'
 import '../../css/Form.css';
 
 const FormLogin = () => {
+    const handleSubmit =  event => {
+        event.preventDefault();
+    }
+
     return (
         <div className="form-content-right">
 
-        <form className="form" >
+        <form className="form" onSubmit={handleSubmit}>
             <h1>Ingresa a tu cuenta </h1>
         
             <div className="form-inputs">

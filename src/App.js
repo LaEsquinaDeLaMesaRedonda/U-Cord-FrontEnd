@@ -1,15 +1,12 @@
 import React from 'react';
 import './css/App.css';
-import LoginScreen from './components/login/LoginScreen';
 import AppRouter from './components/routers/AppRouter';
-import { UserContext } from './UserContext';
+import { UserContext } from './context/UserContext';
 
 function App() {
   return (
     <div className="App">
-        {/* <LoginScreen />
-        <hr /> */}
-        <UserContext.Provider >
+        <UserContext.Provider value={{}} >
           <AppRouter />
         </UserContext.Provider>       
     </div>

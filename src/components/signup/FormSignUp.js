@@ -3,7 +3,8 @@ import validateInfo from '../helpers/validateInfo';
 import useForm from '../hooks/useForm';
 
 const FormSignUp = ( {submitForm} ) => {
-    const { handleChange, values, handleSubmit, errors } = useForm( validateInfo );
+    const inputs = ['carnet','email','password','password2'];
+    const { handleChange, values, handleSubmit, errors } = useForm( inputs, validateInfo );
     
     return (
     <div className="form-content-right">
