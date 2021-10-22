@@ -52,4 +52,4 @@ const useForm = (inputs, validate) => {
     return { handleChange, values, handleSubmit, errors };
 }
 
-export default useForm;
+export default useForm; 
