@@ -1,5 +1,5 @@
-/* const URL = 'https://u-cord.herokuapp.com:443'; */
-const URL = 'http://localhost:8080';
+const URL = 'https://u-cord.herokuapp.com:443';
+
 console.log(URL);
 export const postUser = async user =>{
     const response = await fetch(`${URL}/U-cord/users/newUser`, {
