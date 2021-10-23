@@ -12,14 +12,15 @@ const useForm = (inputs, validate) => {
     const [errors, setErrors] = useState({});
 
     const setCurrentUser = () =>{
-        const{ carnet, email, password} = values;
+        const{ carnet, email, password } = values;
         const nombre = email.split('@')[0];
         return {
-            idUsuario : carnet,
+            idUsuario : parseInt(carnet),
             correo : email,
             nombreCompleto : nombre,
             contraseña: md5(password),
-            url:''
+            url:'',
+            programa: 4
         }
         
     }
@@ -39,7 +40,7 @@ const useForm = (inputs, validate) => {
         
         if( _.isEqual({},currentErrors)  ) {
             const user = setCurrentUser();
-            console.log(user);
+            console.log(JSON.stringify(user));
             postUser( user )
             .then( () => {
                 swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"5000"})
