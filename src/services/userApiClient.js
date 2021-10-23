@@ -13,6 +13,14 @@ export const userApiclient =( () =>{
             });
             if (!response.ok) throw new Error('The response Failed');
         },
+
+        getUserByMail : async mail =>{
+            return await fetch(`${URL}/U-cord/users/${mail}` )
+                .then(response => {
+                    if (!response.ok) throw new Error('The response Failed');
+                    return response.json();
+                })
+        },
     }
     
 })();

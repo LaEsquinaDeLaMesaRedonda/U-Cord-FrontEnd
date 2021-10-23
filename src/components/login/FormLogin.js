@@ -1,11 +1,10 @@
 import React from 'react'
 import '../../css/Form.css';
+import validateInfoLogin from '../helpers/valideInfoLogin';
+import useFormLogin from '../hooks/useFormLogin';
 
 const FormLogin = () => {
-    const handleSubmit =  event => {
-        event.preventDefault();
-    }
-
+    const { handleChange, values, handleSubmit, errors  } = useFormLogin( validateInfoLogin );
     return (
         <div className="form-content-right">
 
@@ -23,8 +22,10 @@ const FormLogin = () => {
                     name="email"
                     placeholder="Ingrese su correo electronico"
                     className="form-input"
-                    value="{values.email}"
+                    value={values.email}
+                    onChange={handleChange}
                 />
+                { errors.email && <p>{ errors.email }</p>}
             </div>
             <div className="form-inputs">
                 <label htmlFor="password" 
@@ -37,8 +38,10 @@ const FormLogin = () => {
                     name="password"
                     placeholder="Ingrese su contraseña"
                     className="form-input"
-                    value="{values.password}"
+                    value={values.password}
+                    onChange={handleChange}
                 />
+                { errors.password && <p>{ errors.password }</p>}
             </div>
             <button id="btn-login" type="submit" className="form-input-btn">Ingresar</button>
             <span className="form-input-login">¿Aun no tienes cuenta? Registrate <a href="/signup"> aqui</a></span>
