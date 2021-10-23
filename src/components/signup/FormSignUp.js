@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import validateInfo from '../helpers/validateInfo';
 import useForm from '../hooks/useForm';
+import { decanaturaApiclient } from '../../services/decanaturaApiClient'
 
-const FormSignUp = ( {submitForm} ) => {
-    const inputs = ['carnet','email','password','password2'];
+const FormSignUp = ( ) => {
+    const inputs = ['carnet','email','password','password2', 'programa'];
     const { handleChange, values, handleSubmit, errors } = useForm( inputs, validateInfo );
+    const [decanaturas, setDecanaturas] = useState([]);
+
+    useEffect(() => {
+        const list = [4,5,7];
+        decanaturaApiclient.getDecanaturas()
+            //Decanaturas filtrandolas con el id 4, 5, 7
+            .then( ( response ) => {
+                const dec = response.filter( d => {
+                    return list.indexOf(d.id) !== -1;
+                });
+                setDecanaturas( dec );
+            })
+            .catch( (error) => console.log(error.message) );     
+    }, []);
     
     return (
     <div className="form-content-right">
@@ -73,6 +88,24 @@ const FormSignUp = ( {submitForm} ) => {
                     onChange={handleChange}
                 />
                 { errors.password2 && <p>{ errors.password2 }</p>}
+            </div>
+            <div className="form-inputs">
+                <label htmlFor="programa" 
+                className="form-label">
+                    Programa Academico
+                </label>
+                <select 
+                    id="programa"
+                    name="programa"
+                    className="form-input"
+                    onChange={handleChange}
+                    >
+                        {  decanaturas.map( ({ id, nombre }) => {
+                            return <option value={id} key={id}> { nombre } </option>;
+                        })}
+                </select>
+                { errors.programa && <p>{ errors.programa }</p>}
+                
             </div>
             <button id="btn-registrar" type="submit" className="form-input-btn">Registrar</button>
             <span className="form-input-login">¿Ya tienes cuenta? Ingresa  <a href="/login"> aqui</a></span>

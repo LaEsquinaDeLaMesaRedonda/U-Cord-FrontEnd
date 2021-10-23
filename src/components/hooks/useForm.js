@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import _ from 'lodash';
 import swal from 'sweetalert';
-import { postUser } from '../../services/userApiClient';
+import { userApiclient } from '../../services/userApiClient'
 import { useState } from 'react';
 
 const useForm = (inputs, validate) => {
@@ -12,7 +12,7 @@ const useForm = (inputs, validate) => {
     const [errors, setErrors] = useState({});
 
     const setCurrentUser = () =>{
-        const{ carnet, email, password } = values;
+        const{ carnet, email, password, programa } = values;
         const nombre = email.split('@')[0];
         return {
             idUsuario : parseInt(carnet),
@@ -20,7 +20,7 @@ const useForm = (inputs, validate) => {
             nombreCompleto : nombre,
             contraseña: md5(password),
             url:'',
-            programa: 4
+            programa: programa
         }
         
     }
@@ -31,6 +31,7 @@ const useForm = (inputs, validate) => {
             ...values,
             [name]: value
         });
+        console.log(values);
     }
 
     const handleSubmit = async event => {
@@ -40,13 +41,13 @@ const useForm = (inputs, validate) => {
         
         if( _.isEqual({},currentErrors)  ) {
             const user = setCurrentUser();
-            console.log(JSON.stringify(user));
-            postUser( user )
+
+            userApiclient.postUser( user )
             .then( () => {
-                swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"5000"})
-                  .then( () => window.location.href = "/main");
+                swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"6000"})
+                  .then( () => window.location.href = "/login");
               })
-              .catch( () => swal({title: "Error", icon:"error", text: "Error al registrar el usuario", timer:"5000"}))
+            .catch( () => swal({title: "Error", icon:"error", text: "Error al registrar el usuario", timer:"6000"}));
         }
     }
 

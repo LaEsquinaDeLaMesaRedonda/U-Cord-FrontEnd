@@ -1,6 +1,6 @@
 const validateInfo = values => {
     const errors = {};
-    const { carnet, email, password, password2 } = values
+    const { carnet, email, password, password2, programa } = values
     const regularExp = /^[-\w.%+]{1,64}@(?:mail\.)*escuelaing.edu.co$/i;
     //Carnet
     if( !carnet.trim() ) errors.carnet = "Carnet obligatorio";
@@ -16,6 +16,7 @@ const validateInfo = values => {
 
     
     if( password !== password2 ) errors.password2 = "Las contraseñas deben coincidir";
+    if ( !programa ) errors.programa = "Programa obligatorio";
 
     return errors;
 }
