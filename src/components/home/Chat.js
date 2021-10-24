@@ -1,7 +1,16 @@
+import { ChatEngine } from 'react-chat-engine';
 import React from 'react';
 
 const Chat = () => {
     return (
+        <ChatEngine
+            height = "100vh"
+            projectID = "f2835e2c-343d-4ab3-9944-7e92dc3c6e98"
+            userName = "AdminTest"
+            userSecret = "123123"
+        />
+    )
+    /*return (
         <div className="container">
                 <div className="row">
                     <div className="col s8 offset-s2">
@@ -36,7 +45,7 @@ const Chat = () => {
                     </div>
                 </div>
             </div>
-    )
+    )*/
 }
 
 export default Chat;
