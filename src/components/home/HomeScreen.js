@@ -1,12 +1,14 @@
 import React from 'react'
-
+import "../../css/Main.css"
+import Chat from './Chat';
 const HomeScreen = () => {
+    
     return (
         <div>
-            <h1> HomeScreen</h1>
-            <hr/>
+            <center><h1> HomeScreen </h1></center>
+            <Chat />            
         </div>
-    )
+    );
 }
 
 export default HomeScreen;

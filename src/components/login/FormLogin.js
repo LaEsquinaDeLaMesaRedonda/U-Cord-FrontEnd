@@ -3,7 +3,7 @@ import '../../css/Form.css';
 import validateInfoLogin from '../helpers/valideInfoLogin';
 import useFormLogin from '../hooks/useFormLogin';
 
-const FormLogin = () => {
+const FormLogin = ( ) => {
     const { handleChange, values, handleSubmit, errors  } = useFormLogin( validateInfoLogin );
     return (
         <div className="form-content-right">
