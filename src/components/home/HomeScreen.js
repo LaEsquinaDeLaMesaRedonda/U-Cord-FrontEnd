@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context/UserContext';
 import "../../css/Main.css"
 import Chat from './Chat';
 const HomeScreen = () => {
-    
+    const { user } = useContext( UserContext );
     return (
         <div>
-            <center><h1> HomeScreen </h1></center>
+            <center><h1> Bienvenido, { user.nombreCompleto}</h1></center>
             <Chat />            
         </div>
     );
