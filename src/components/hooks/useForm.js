@@ -37,16 +37,20 @@ const useForm = (inputs, validate) => {
         event.preventDefault();
         const currentErrors = await validate(values);
         setErrors( currentErrors );
+
         
         if( _.isEqual({},currentErrors)  ) {
             const user = setCurrentUser();
-
+            //const authO = {'ProjectId': 'f2835e2c-343d-4ab3-9944-7e92dc3c6e98', 'User-Name': user.nombreCompleto, 'User-Secret': user.contraseña};
+            
             userApiclient.postUser( user )
             .then( () => {
                 swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"6000"})
                   .then( () => window.location.href = "/login");
               })
             .catch( () => swal({title: "Error", icon:"error", text: "Error al registrar el usuario", timer:"6000"}));
+
+            
         }
     }
 

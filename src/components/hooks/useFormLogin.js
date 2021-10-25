@@ -5,6 +5,8 @@ import { useContext, useState } from 'react';
 import { userApiclient } from '../../services/userApiClient';
 import { UserContext } from '../../context/UserContext';
 import { types } from '../types/types';
+import axios from 'axios';
+
 
 const useFormLogin = ( validate ) => {
     const { dispatch } = useContext( UserContext );
@@ -25,12 +27,13 @@ const useFormLogin = ( validate ) => {
 
     const login = () => {
         const { email, password } = values;
+        
         userApiclient.getUserByMail( email )
             .then( user => {
                 const { contraseña:uPassword } = user;
 
                 if( uPassword !== md5(password) ) {
-                    swal({title: "Login", icon:"error", text: "Usuario o contraseña incorrecta", timer:"5000"})
+                    swal({title: "Login", icon:"error", text: "Usuario o contraseña incorrecta", timer:"5000"});
                     return ;
                 }
                 const action = {
@@ -45,15 +48,22 @@ const useFormLogin = ( validate ) => {
                 swal({title: "Login", icon:"error", text: "El usuario ingresado no se encuentra registrado", timer:"5000"});
             });
             
+        return values;
+
     }
 
     const handleSubmit = async event => {
         event.preventDefault();
         const currentErrors = await validate(values);
         setErrors( currentErrors );
-        
         if( _.isEqual({},currentErrors)  ) {
-            login();
+            const { email, password } = login();
+            const auth0 = {'Project-ID': "f2835e2c-343d-4ab3-9944-7e92dc3c6e98", 'User-Name': email.toString, 'User-Secret': md5(password).toString};
+            try{
+                await axios.get('https://api.chatengine.io/chats', {headers: auth0});
+            }catch (e){
+                
+            }
         }
     }
 

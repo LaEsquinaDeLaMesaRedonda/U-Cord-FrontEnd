@@ -6,7 +6,7 @@ const HomeScreen = () => {
     const { user } = useContext( UserContext );
     return (
         <div>
-            <center><h1> Bienvenido, { user.nombreCompleto}</h1></center>
+            <center><h1> Bienvenido a U-cord, { user.nombreCompleto}</h1></center>
             <Chat />            
         </div>
     );
