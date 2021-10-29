@@ -3,6 +3,8 @@ import _ from 'lodash';
 import swal from 'sweetalert';
 import { userApiclient } from '../../services/userApiClient'
 import { useState } from 'react';
+import { chatEngineApiClient } from '../../services/chatEngineApiClient';
+
 
 const useForm = (inputs, validate) => {
     const initValues = {};
@@ -41,19 +43,22 @@ const useForm = (inputs, validate) => {
         
         if( _.isEqual({},currentErrors)  ) {
             const user = setCurrentUser();
-            //const authO = {'ProjectId': 'f2835e2c-343d-4ab3-9944-7e92dc3c6e98', 'User-Name': user.nombreCompleto, 'User-Secret': user.contraseña};
-            
-            userApiclient.postUser( user )
-            .then( () => {
-                swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"6000"})
-                  .then( () => window.location.href = "/login");
-              })
-            .catch( () => swal({title: "Error", icon:"error", text: "Error al registrar el usuario", timer:"6000"}));
+        
+            await chatEngineApiClient.postUser( user )
+                    .then( () => {
+                        userApiclient.postUser( user )    
+                            .then( () => {
+                                swal({title: "Registro", icon:"success", text: "Usuario registrado", timer:"6000"})
+                                    .then( () => window.location.href = "/login");
+                            })
+                            .catch( () => swal({title: "Error", icon:"error", text: "Error2 al registrar el usuario", timer:"6000"}));
+
+                    })
+                    .catch( () => swal({title: "Error", icon:"error", text: "Error1 al registrar el usuario", timer:"6000"}));
 
             
         }
     }
-
     return { handleChange, values, handleSubmit, errors };
 }
 
