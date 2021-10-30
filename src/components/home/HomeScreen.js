@@ -1,13 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-import "../../css/Main.css"
+import { types } from '../types/types';
 import Chat from './Chat';
+import "../../css/Main.css";
+
 const HomeScreen = () => {
-    const { user } = useContext( UserContext );
+    const { user, dispatch } = useContext( UserContext );
+
+    const handleClick = () => {
+        const action = {
+            type: types.logout,
+        }
+        dispatch( action );
+    }
+
     return (
         <div>
-            <center><h1> Bienvenido a U-cord, { user.nombreCompleto}</h1></center>
-            <Chat />            
+            <div className="flex-container">
+                <h1> Bienvenido a U-cord: { user.nombreCompleto}</h1>
+                <button 
+                    type="button" 
+                    class="btn btn-dark" 
+                    onClick={handleClick}
+                    > Logout </button>
+            </div>
+            
+            <div>
+                <Chat />            
+            </div>
+            
         </div>
     );
 }

@@ -1,8 +1,24 @@
-.mensaje{
-    padding: 6px ;
-}
-.scroll{
-    overflow-y: auto;
-    height: 300px;
+:root {
+    --colorTitulos: #DDD;
+    --azulFondo: #0d4f63;
+    --color2: #3b8cde;
+    --color1: #67c7ca;
 }
 
+.flex-container {
+    display: flex;
+    padding: 15px 0px;
+    justify-content: space-between;
+    border: 1px solid var(--colorTitulos);
+        background: linear-gradient(
+      50deg,
+      rgb(21, 30, 36) 0%,
+      rgb(17, 164, 167) 100%
+    );
+    color: var(--colorTitulos);
+    border-radius: 10px;
+}
+
+.flex-container  * {
+    margin: 0 10px;
+}

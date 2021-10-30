@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: var(--azulFondo);
+    background-color: var(--azulFondo) !important;
 }
 
 .form-container {

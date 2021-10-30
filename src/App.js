@@ -3,6 +3,7 @@ import './css/App.css';
 import AppRouter from './components/routers/AppRouter';
 import { UserContext } from './context/UserContext';
 import { authReducer } from './components/auth/authReducer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const init = () =>{
