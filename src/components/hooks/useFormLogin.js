@@ -5,7 +5,8 @@ import { useContext, useState } from 'react';
 import { userApiclient } from '../../services/userApiClient';
 import { UserContext } from '../../context/UserContext';
 import { types } from '../types/types';
-import axios from 'axios';
+import { chatEngineApiClient } from '../../services/chatEngineApiClient';
+
 
 
 const useFormLogin = ( validate ) => {
@@ -41,6 +42,7 @@ const useFormLogin = ( validate ) => {
                     payload: user
                 }
                 dispatch( action );
+                chatEngineApiClient.getUser( values );
                 window.location.href = "/main";
                 
             })
@@ -48,7 +50,7 @@ const useFormLogin = ( validate ) => {
                 swal({title: "Login", icon:"error", text: "El usuario ingresado no se encuentra registrado", timer:"5000"});
             });
             
-        return values;
+        
 
     }
 
@@ -57,13 +59,7 @@ const useFormLogin = ( validate ) => {
         const currentErrors = await validate(values);
         setErrors( currentErrors );
         if( _.isEqual({},currentErrors)  ) {
-            const { email, password } = login();
-            const auth0 = {'Project-ID': "f2835e2c-343d-4ab3-9944-7e92dc3c6e98", 'User-Name': email.toString, 'User-Secret': md5(password).toString};
-            try{
-                await axios.get('https://api.chatengine.io/chats', {headers: auth0});
-            }catch (e){
-                
-            }
+            login();
         }
     }
 

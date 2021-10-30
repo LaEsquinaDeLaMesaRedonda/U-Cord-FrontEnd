@@ -20,7 +20,7 @@ const HomeScreen = () => {
                 <h1> Bienvenido a U-cord: { user.nombreCompleto}</h1>
                 <button 
                     type="button" 
-                    class="btn btn-dark" 
+                    className="btn btn-dark" 
                     onClick={handleClick}
                     > Logout </button>
             </div>
