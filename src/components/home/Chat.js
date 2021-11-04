@@ -7,7 +7,9 @@ const Chat = () => {
 
     const { user } = useContext(UserContext);
 
-    
+    const getChats = () => {
+        chatEngineApiClient.getChatsByUser(user);
+    }
 
     const salirChat = () => {
         chatEngineApiClient.darDeBaja(user, 67693);
@@ -21,6 +23,9 @@ const Chat = () => {
             userSecret = {user.contraseña}
             renderChatSettings={(chatAppState) => 
             <div>
+                <button onClick = {getChats}>
+                    Mostrar chats (consola).
+                </button>
                 <button onClick = {salirChat} >
                     Salir del chat.
                 </button>

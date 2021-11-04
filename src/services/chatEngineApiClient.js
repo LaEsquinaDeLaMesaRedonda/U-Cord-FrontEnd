@@ -77,9 +77,23 @@ export const chatEngineApiClient =( () =>{
             .then( response => {
                 console.log(JSON.stringify(response.data));
             });;
+        },
+        getChatsByUser : async (context) => {
+            var settings = {
+                "url": `${URL}chats/`,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                  "Project-ID": PROJECT_ID,
+                  "User-Name": context.correo,
+                  "User-Secret": context.contraseña
+                },
+              };
+              await axios(settings)
+                .then( response => {
+                    console.log(JSON.stringify(response.data));
+                });
         }
     }
     
 })();
-
-
