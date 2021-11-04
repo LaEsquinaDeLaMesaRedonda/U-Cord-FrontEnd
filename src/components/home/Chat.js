@@ -1,4 +1,4 @@
-import { ChatEngine } from 'react-chat-engine';
+import { ChatEngine, ChatEngineContext } from 'react-chat-engine';
 import { UserContext } from '../../context/UserContext';
 import React, { useContext } from 'react';
 import { chatEngineApiClient } from '../../services/chatEngineApiClient';
@@ -7,12 +7,14 @@ const Chat = () => {
 
     const { user } = useContext(UserContext);
 
+    const {activeChat} = useContext(ChatEngineContext);
+
     const getChats = () => {
         chatEngineApiClient.getChatsByUser(user);
     }
 
     const salirChat = () => {
-        chatEngineApiClient.darDeBaja(user, 67693);
+        chatEngineApiClient.darDeBaja(user, activeChat);
     };
 
     return (
@@ -31,6 +33,7 @@ const Chat = () => {
                 </button>
             </div>
             }
+            offset = {-5}
         />
     );
 }

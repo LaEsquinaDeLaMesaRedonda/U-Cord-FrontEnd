@@ -3,6 +3,7 @@ import { UserContext } from '../../context/UserContext';
 import { types } from '../types/types';
 import Chat from './Chat';
 import "../../css/Main.css";
+import { ChatEngineWrapper } from 'react-chat-engine';
 
 const HomeScreen = () => {
     const { user, dispatch } = useContext( UserContext );
@@ -24,9 +25,10 @@ const HomeScreen = () => {
                     onClick={handleClick}
                     > Logout </button>
             </div>
-            
             <div>
-                <Chat />            
+                <ChatEngineWrapper>
+                    <Chat />           
+                </ChatEngineWrapper> 
             </div>
             
         </div>
