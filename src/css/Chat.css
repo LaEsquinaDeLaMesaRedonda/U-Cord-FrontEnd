@@ -9,8 +9,80 @@ body {
     background: #000;
 }
 
+/*
+Columna del chat
+*/
+
+/*
+Titulo
+*/
+
+.ce-chat-title-container{
+    background-color: black !important;
+    color: white !important;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+.ce-chat-title-text{
+
+}
+
+/*
+Mensajes y su información en general
+*/
+
+.ce-message-bubble {
+    color: #091833 !important;
+    background-color: #0ABDC6 !important;
+}
+
+.ce-their-message-bubble {
+    color: #0ABDC6 !important;
+    background-color: #091833 !important;
+}
+
+.ce-their-message-sender {
+    color: white !important;
+}
+
+.ce-message-date-text {
+    color: #0ABDC6 !important;
+}
+
+.ce-chat-feed-container {
+    background-color: black !important;
+}
+
+.ce-send-button-container {
+    background-color: #EA00D9 !important;
+    color: black !important;
+}
+
+.ql-toolbar {
+    background-color: black;
+}
+
+.ql-container{
+    background-color: #091833;
+    color: white;
+}
+
+/*
+Columna derecha
+*/
+.ce-settings-column {
+    background-color: black !important;
+    align-content: center !important;
+}
+
+
+/*
+Botones oscuros, led
+*/
+
 .glow-on-hover {
-    width: 90%;
+    width: 250px;
     height: 50px;
     border: none;
     outline: none;

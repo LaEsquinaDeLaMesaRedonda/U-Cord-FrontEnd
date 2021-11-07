@@ -18,6 +18,10 @@ const Chat = () => {
         if (window.confirm("¿Estas seguro de querer abandonar esta sala de chat?")) chatEngineApiClient.darDeBaja(user, activeChat);
     };
 
+    const noImplementado = () => {
+        window.alert("Función aun no implementada, lamentamos las molestias.");
+    }
+
     return (
         <ChatEngine
             //Chat functionality options
@@ -30,7 +34,21 @@ const Chat = () => {
             height = "88.3vh"
             renderChatSettings={(chatAppState) => 
             <div
-            allign = "right">
+            align = "center">
+                <button
+                type = "button"
+                className = "glow-on-hover"
+                onClick = {noImplementado} >
+                    Mostrar integrantes.
+                </button>
+                
+                <button
+                type = "button"
+                className = "glow-on-hover"
+                onClick = {noImplementado} >
+                    Mi perfil.
+                </button>
+
                 <button 
                 type = "button"
                 className = "glow-on-hover"
