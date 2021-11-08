@@ -3,10 +3,31 @@ body {
     margin: 10;
     padding: 10;
     width: 100%;
-    height: 90vh;
     justify-content: center;
     align-items: center;
     background: #000;
+}
+
+/*
+Columna de chats
+*/
+
+.ce-chat-card {
+    background-color: #091833 !important;
+    color: #0ABDC6 !important;
+    border-radius: 15px;
+    width: 310px;
+    margin: 5px;
+}
+
+.ce-chats-container{
+    background-color: black !important;
+    border-radius: 0px !important;
+}
+
+.ce-chat-list{
+    overflow: auto !important;
+    background-color: black !important;
 }
 
 /*
@@ -22,10 +43,6 @@ Titulo
     color: white !important;
     opacity: 0.9;
     filter: alpha(opacity=90);
-}
-
-.ce-chat-title-text{
-
 }
 
 /*
@@ -61,11 +78,13 @@ Mensajes y su información en general
 
 .ql-toolbar {
     background-color: black;
+    border-color: #0ABDC6 !important;
 }
 
 .ql-container{
-    background-color: #091833;
+    background-color: black;
     color: white;
+    border-color: #0ABDC6 !important;
 }
 
 /*

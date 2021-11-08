@@ -18,12 +18,12 @@ const HomeScreen = () => {
     return (
         <div>
             <div className="flex-container">
-                <h1> Bienvenido a U-cord: { user.nombreCompleto}</h1>
+                <h1> Bienvenido a U-cord: { user.nombreCompleto }.</h1>
                 <button 
                     type="button" 
-                    className="btn btn-dark" 
+                    className="glow-on-hover" 
                     onClick={handleClick}
-                    > Logout </button>
+                    > Cerrar Sesión </button>
             </div>
             <div>
                 <ChatEngineWrapper>

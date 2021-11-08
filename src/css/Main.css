@@ -12,8 +12,8 @@
     border: 1px solid var(--colorTitulos);
         background: linear-gradient(
       50deg,
-      rgb(21, 30, 36) 0%,
-      rgb(17, 164, 167) 100%
+      rgb(0, 0, 0) 0%,
+      rgb(9, 24, 51) 100%
     );
     color: var(--colorTitulos);
     border-radius: 10px;

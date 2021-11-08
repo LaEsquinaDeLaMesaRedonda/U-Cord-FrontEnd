@@ -31,30 +31,37 @@ const Chat = () => {
             offset = {-5}
 
             //Chat custom UI options
-            height = "88.3vh"
+            height = "88vh"
+            renderNewChatForm={(creds) => {}}
             renderChatSettings={(chatAppState) => 
             <div
             align = "center">
-                <button
-                type = "button"
-                className = "glow-on-hover"
-                onClick = {noImplementado} >
-                    Mostrar integrantes.
-                </button>
-                
+
+                <img src = "https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png" 
+                width = "240px"
+                height = "240px"
+                alt = "Imagen de perfil estandar (no definida aun)"/>
                 <button
                 type = "button"
                 className = "glow-on-hover"
                 onClick = {noImplementado} >
                     Mi perfil.
                 </button>
-
-                <button 
+                
+                <button
                 type = "button"
                 className = "glow-on-hover"
-                onClick = {getChats} >
-                    Mostrar chats (consola).
+                onClick = {noImplementado} >
+                    Mostrar integrantes.
                 </button>
+
+                <button
+                type = "button"
+                className = "glow-on-hover"
+                onClick = {noImplementado} >
+                    Buscar sala de estudio.
+                </button>
+
                 <button 
                 type = "button"
                 className = "glow-on-hover"
