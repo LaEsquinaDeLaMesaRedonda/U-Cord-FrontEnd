@@ -5,12 +5,14 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    background: #000;
 }
 
 /*
 Columna de chats
 */
+.flex-container {
+    background-color: #000;
+}
 
 .ce-chat-card {
     background-color: #091833 !important;

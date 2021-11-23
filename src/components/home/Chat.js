@@ -3,6 +3,7 @@ import { UserContext } from '../../context/UserContext';
 import React, { useContext } from 'react';
 import { chatEngineApiClient } from '../../services/chatEngineApiClient';
 import "../../css/Chat.css";
+import ChatForm from '../ui/ChatForm';
 
 const Chat = () => {
 
@@ -32,8 +33,8 @@ const Chat = () => {
 
             //Chat custom UI options
             height = "88vh"
-            renderNewChatForm={(creds) => {}}
-            renderChatSettings={(chatAppState) => 
+            renderNewChatForm={(creds) => <ChatForm key ={1}>  </ChatForm> }
+            /* renderChatSettings={(chatAppState) => 
             <div
             align = "center">
 
@@ -69,7 +70,7 @@ const Chat = () => {
                     Salir del chat.
                 </button>
             </div>
-            }
+            } */
         />
     );
 }

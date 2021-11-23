@@ -93,7 +93,29 @@ export const chatEngineApiClient =( () =>{
                 .then( response => {
                     console.log(JSON.stringify(response.data));
                 });
-        }
+        },
+        updatePictureByUser : async ( user ) =>{
+            /* https://api.chatengine.io/users/{{user_id}}/
+            const {  } = user;
+            var config = {
+                "url": `${URL}users/${}`,
+                "method": "PUT",
+                "timeout": 0,
+                "headers": {
+                    "Project-ID": PROJECT_ID,
+                    "User-Name": admin.username,
+                    "User-Secret": admin.contraseña
+                },
+                "data": {username: context.correo},
+            };
+
+            console.log(config);
+
+            await axios(config)
+            .then( response => {
+                console.log(JSON.stringify(response.data));
+            });; */
+        } 
     }
     
 })();
