@@ -8,7 +8,7 @@ const Chat = () => {
 
     const { user } = useContext(UserContext);
 
-    const {activeChat} = useContext(ChatEngineContext);
+    const { activeChat } = useContext(ChatEngineContext);
 
     const getChats = () => {
         chatEngineApiClient.getChatsByUser(user);
@@ -22,6 +22,17 @@ const Chat = () => {
         window.alert("Función aun no implementada, lamentamos las molestias.");
     }
 
+    const sortMembers = () => {
+        const members = getMembers();
+        const list = members.map;
+        /*const list = members.person.map((member) => <li>member.userName</li>);
+        return list;*/
+    }
+    const getMembers = () => {
+        //chatEngineApiClient.getUsersByChat(user, activeChat);
+        return chatEngineApiClient.getUsersByChat(activeChat);
+    }
+
     return (
         <ChatEngine
             //Chat functionality options
@@ -32,42 +43,36 @@ const Chat = () => {
 
             //Chat custom UI options
             height = "88vh"
-            renderNewChatForm={(creds) => {}}
-            renderChatSettings={(chatAppState) => 
+            renderNewChatForm = {(creds) => {}}
+            renderChatSettings = {(chatAppState) => 
             <div
             align = "center">
 
-                <img src = "https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png" 
-                width = "240px"
-                height = "240px"
-                alt = "Imagen de perfil estandar (no definida aun)"/>
-                <button
-                type = "button"
-                className = "glow-on-hover"
-                onClick = {noImplementado} >
-                    Mi perfil.
-                </button>
-                
-                <button
-                type = "button"
-                className = "glow-on-hover"
-                onClick = {noImplementado} >
-                    Mostrar integrantes.
-                </button>
+                    <button
+                    type = "button"
+                    className = "glow-on-hover"
+                    onClick = {sortMembers} >
+                        Buscar sala de estudio.
+                    </button>
 
-                <button
-                type = "button"
-                className = "glow-on-hover"
-                onClick = {noImplementado} >
-                    Buscar sala de estudio.
-                </button>
+                <renderOptionsSettings>
 
-                <button 
-                type = "button"
-                className = "glow-on-hover"
-                onClick = {salirChat} >
-                    Salir del chat.
-                </button>
+                    <button
+                    type = "button"
+                    className = "glow-on-hover"
+                    onClick = {noImplementado} >
+                        Mi perfil.
+                    </button>
+
+                    <button 
+                    type = "button"
+                    className = "glow-on-hover"
+                    onClick = {salirChat} >
+                        Salir del chat.
+                    </button>
+
+                </renderOptionsSettings>
+
             </div>
             }
         />

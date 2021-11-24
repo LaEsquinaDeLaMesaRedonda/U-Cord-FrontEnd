@@ -93,6 +93,23 @@ export const chatEngineApiClient =( () =>{
                 .then( response => {
                     console.log(JSON.stringify(response.data));
                 });
+        },
+        getUsersByChat : async (chat_id) => {
+            var config = {
+                "url": `${URL}chats/${chat_id}/people/`,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Project-ID": PROJECT_ID,
+                    "User-Name": admin.username,
+                    "User-Secret": admin.contraseña
+                },
+            };
+
+            await axios(config)
+            .then(response => {
+            return JSON.stringify(response.data);
+            });
         }
     }
     

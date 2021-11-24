@@ -1,3 +1,8 @@
+:root{
+    --azulClaro: #0ABDC6;
+    --azulOscuro: #091833;
+}
+
 html,
 body {
     margin: 10;
@@ -5,7 +10,11 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    background: #000;
+}
+
+.flex-container {
+    background-color: #000 !important;
+    border-radius: 0% !important;
 }
 
 /*
@@ -13,8 +22,8 @@ Columna de chats
 */
 
 .ce-chat-card {
-    background-color: #091833 !important;
-    color: #0ABDC6 !important;
+    background-color: var(--azulOscuro) !important;
+    color: var(--azulClaro) !important;
     border-radius: 15px;
     width: 310px;
     margin: 5px;
@@ -50,8 +59,8 @@ Mensajes y su información en general
 */
 
 .ce-message-bubble {
-    color: #091833 !important;
-    background-color: #0ABDC6 !important;
+    color: var(--azulOscuro) !important;
+    background-color: var(--azulClaro) !important;
 }
 
 .ce-their-message-bubble {
