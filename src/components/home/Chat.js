@@ -34,7 +34,7 @@ const Chat = () => {
             //Chat custom UI options
             height = "88vh"
             renderNewChatForm={(creds) => <ChatForm key ={1}>  </ChatForm> }
-            /* renderChatSettings={(chatAppState) => 
+            renderChatSettings={(chatAppState) => 
             <div
             align = "center">
 
@@ -70,7 +70,7 @@ const Chat = () => {
                     Salir del chat.
                 </button>
             </div>
-            } */
+            }
         />
     );
 }

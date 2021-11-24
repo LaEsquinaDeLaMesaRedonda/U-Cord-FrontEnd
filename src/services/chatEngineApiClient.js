@@ -28,6 +28,16 @@ export const chatEngineApiClient =( () =>{
         };
     }
 
+    const getFile =async (url) =>{
+        const response = await fetch( url, {
+            mode: 'no-cors'            
+        });
+        const data = await response.blob();
+
+        return new File( [data], "userPhoto.png", {type: 'image/jpg'});
+          
+    }
+
     return {
         postUser : async user =>{
             const data = setData( user );
@@ -71,22 +81,21 @@ export const chatEngineApiClient =( () =>{
                 "data": {username: context.correo},
             };
 
-            console.log(config);
-
             await axios(config)
             .then( response => {
                 console.log(JSON.stringify(response.data));
             });;
         },
         getChatsByUser : async (context) => {
+            const { correo, contraseña } = context;
             var settings = {
                 "url": `${URL}chats/`,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
                   "Project-ID": PROJECT_ID,
-                  "User-Name": context.correo,
-                  "User-Secret": context.contraseña
+                  "User-Name": correo,
+                  "User-Secret": contraseña
                 },
               };
               await axios(settings)
@@ -94,28 +103,50 @@ export const chatEngineApiClient =( () =>{
                     console.log(JSON.stringify(response.data));
                 });
         },
-        updatePictureByUser : async ( user ) =>{
-            /* https://api.chatengine.io/users/{{user_id}}/
-            const {  } = user;
+
+        updatePasswdByUser : async ( user, newPasswd ) => {
+            /* https://api.chatengine.io/users/me/*/
+            
+            const { correo } = user;
+            
             var config = {
-                "url": `${URL}users/${}`,
-                "method": "PUT",
-                "timeout": 0,
-                "headers": {
-                    "Project-ID": PROJECT_ID,
-                    "User-Name": admin.username,
-                    "User-Secret": admin.contraseña
-                },
-                "data": {username: context.correo},
+                method: 'put',
+                url: URL+`users/`,
+                headers: authHeader,
+                data : { username: "correo",secret: md5(newPasswd) },
             };
 
             console.log(config);
 
             await axios(config)
-            .then( response => {
-                console.log(JSON.stringify(response.data));
-            });; */
-        } 
-    }
-    
+                .then( response => {
+                    console.log(JSON.stringify(response.data));
+                });
+            }
+        ,
+        updatePictureByUser : async ( user, newURL ) => {
+            /* https://api.chatengine.io/users/me/*/
+            
+            const { correo, contraseña } = user;
+            
+            var config = {
+                method: 'patch',
+                url: URL+`users/me`,
+                headers: {
+                    "Project-ID": PROJECT_ID,
+                    'PRIVATE-KEY': PRIVATE_KEY,
+                    "User-Name": correo,
+                    "User-Secret": contraseña
+                },
+                data : { avatar: getFile(newURL)},
+            };
+
+            console.log(config);
+
+            await axios(config)
+                .then( response => {
+                    console.log(JSON.stringify(response.data));
+                });
+            }
+        }
 })();
