@@ -42,7 +42,6 @@ const Avatar = () => {
                         const uploadRef = storageRef.child(
                             `${correo}_avatar.jpg`,
                         );
-                        console.log(uploadRef);
                         uploadRef.put(croppedImage).then(() => {
                             uploadRef.getDownloadURL().then(url => {
                                 console.log('oas');
