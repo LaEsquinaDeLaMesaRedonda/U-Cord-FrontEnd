@@ -1,7 +1,6 @@
-import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { UserContext } from 'context/UserContext';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Icon, IconGroup, Image, Loader } from 'semantic-ui-react';
+import { Icon, IconGroup, Image } from 'semantic-ui-react';
 import { fb } from 'services';
 import ImageUpload from './ImageUpload';
 
@@ -43,6 +42,15 @@ const Avatar = () => {
                         const uploadRef = storageRef.child(
                             `${correo}_avatar.jpg`,
                         );
+                        fb.auth
+                            .signInWithEmailAndPassword(
+                                user.correo,
+                                user.contraseña,
+                            )
+                            .then(res => {
+                                console.log(res);
+                            });
+                        // esto solo funciona si estamos auth con firebase
                         uploadRef.put(croppedImage).then(() => {
                             uploadRef.getDownloadURL().then(url => {
                                 console.log('oas');
@@ -57,7 +65,10 @@ const Avatar = () => {
                             });
                         });
                     }}
-                    close={() => setImage(null)}
+                    handleClose={() => {
+                        setImage(null);
+                        window.location.href = '/main';
+                    }}
                 />
             )}
 
@@ -81,9 +92,7 @@ const Avatar = () => {
                         ) : (
                             <div className="empty-avatar">
                                 <Image
-                                    src={
-                                        'https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-20.jpg'
-                                    }
+                                    src={'./img/no-photo-available.jpg'}
                                     avatar
                                 />
                             </div>
