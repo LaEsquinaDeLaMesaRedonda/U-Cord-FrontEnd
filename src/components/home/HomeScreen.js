@@ -4,7 +4,6 @@ import { types } from '../types/types';
 import Chat from './Chat';
 import '../../css/Main.css';
 import { ChatEngineWrapper } from 'react-chat-engine';
-import Avatar from 'components/ImageUpload/Avatar';
 
 const HomeScreen = () => {
     const { user, dispatch } = useContext(UserContext);
@@ -19,7 +18,7 @@ const HomeScreen = () => {
     return (
         <div>
             <div className="flex-container">
-                <h1> Bienvenido a U-cord: {user.nombreCompleto}.</h1>
+                <h1> Bienvenido a U-cord</h1>
                 <button
                     type="button"
                     className="glow-on-hover"
@@ -31,7 +30,6 @@ const HomeScreen = () => {
             <div>
                 <ChatEngineWrapper>
                     <Chat />
-                    <Avatar></Avatar>
                 </ChatEngineWrapper>
             </div>
         </div>

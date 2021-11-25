@@ -18,6 +18,7 @@ try {
         messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
         appId: process.env.REACT_APP_APP_ID,
     };
+    console.log(firebaseConfig);
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 } catch (error) {

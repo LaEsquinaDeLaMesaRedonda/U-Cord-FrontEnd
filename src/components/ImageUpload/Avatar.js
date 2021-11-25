@@ -1,3 +1,4 @@
+import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { UserContext } from 'context/UserContext';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon, IconGroup, Image, Loader } from 'semantic-ui-react';
@@ -19,6 +20,7 @@ const Avatar = () => {
     return (
         <>
             <input
+                style={{ display: 'none' }}
                 type="file"
                 ref={inputRef}
                 className="file-input"
@@ -30,7 +32,6 @@ const Avatar = () => {
                     }
                 }}
             />
-
             {image && (
                 <ImageUpload
                     crop
@@ -61,42 +62,46 @@ const Avatar = () => {
             )}
 
             <div className="left-rail-header">
-                <Icon
-                    onClick={() => fb.auth.signOut()}
-                    className="sign-out"
-                    name="sign out"
-                />
-                {user.url ? (
-                    <div className="current-user-info">
-                        <IconGroup
-                            onClick={() => {
-                                const input = inputRef.current;
-                                if (input) {
-                                    input.value = '';
-                                    input.click();
-                                }
-                            }}
-                            className="user-avatar"
-                            size="large"
-                        >
-                            {user.url ? (
+                <div className="current-user-info">
+                    <IconGroup
+                        onClick={() => {
+                            const input = inputRef.current;
+                            if (input) {
+                                input.value = '';
+                                input.click();
+                            }
+                        }}
+                        className="user-avatar"
+                        size="large"
+                    >
+                        {user.url ? (
+                            <div>
                                 <Image src={user.url} avatar />
-                            ) : (
-                                <div className="empty-avatar">
-                                    {correo.toUpperCase()}
-                                </div>
-                            )}
+                            </div>
+                        ) : (
+                            <div className="empty-avatar">
+                                <Image
+                                    src={
+                                        'https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-20.jpg'
+                                    }
+                                    avatar
+                                />
+                            </div>
+                        )}
 
-                            <Icon corner name="camera" inverted circular />
-                        </IconGroup>
-
-                        <div className="current-username">{correo}</div>
+                        <Icon
+                            corner
+                            style={{ height: '10px', width: '10rem' }}
+                            name="camera"
+                            circular
+                        />
+                    </IconGroup>
+                    <br />
+                    <div style={{ color: '#fff' }} className="current-username">
+                        {user.nombreCompleto}
                     </div>
-                ) : (
-                    <div className="user-loading">
-                        <Loader active size="small" />
-                    </div>
-                )}
+                    <br />
+                </div>
             </div>
         </>
     );

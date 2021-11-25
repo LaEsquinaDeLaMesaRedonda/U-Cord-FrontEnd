@@ -1,5 +1,5 @@
 :root {
-    --colorTitulos: #DDD;
+    --colorTitulos: #ddd;
     --azulFondo: #0d4f63;
     --color2: #3b8cde;
     --color1: #67c7ca;
@@ -9,11 +9,10 @@
     display: flex;
     padding: 15px 0px;
     justify-content: space-between;
-
+    background-color: var(--azulFondo) !important;
     color: var(--colorTitulos);
-    border-radius: 10px;
 }
 
-.flex-container  * {
+.flex-container * {
     margin: 0 10px;
 }

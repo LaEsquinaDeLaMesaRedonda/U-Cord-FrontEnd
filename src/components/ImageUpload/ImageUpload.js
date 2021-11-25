@@ -35,17 +35,31 @@ const ImageUpload = ({
                         image={imageSrc}
                     />
                 ) : (
-                    <Image size="medium" src={imageSrc} alt="preview" />
+                    <Image wrapped size="medium" src={imageSrc} alt="preview" />
                 )}
+                <Modal.Description>
+                    <center>
+                        <h1>{user.correo}</h1>
+                        <p>
+                            Hemos encontrado la siguiente imagen de avatar
+                            asociada a tu dirección de correo electrónico.
+                        </p>
+                        <b>
+                            <i>
+                                <p>¿Está bien usar esta foto?</p>
+                            </i>
+                        </b>
+                    </center>
+                </Modal.Description>
             </Modal.Content>
 
             <Modal.Actions>
                 <div className="image-upload-actions">
-                    <button className="cancel" onClick={handleClose}>
+                    <button className="ui red button" onClick={handleClose}>
                         Cancelar
                     </button>
                     <button
-                        className="submit"
+                        className="ui primary button"
                         onClick={() => {
                             if (crop && cropRef) {
                                 const canvas = cropRef.current

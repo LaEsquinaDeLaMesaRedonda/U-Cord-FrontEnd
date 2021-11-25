@@ -16,18 +16,19 @@ Columna de chats
 
 .ce-chat-card {
     background-color: #091833 !important;
-    color: #0ABDC6 !important;
+    color: #0abdc6 !important;
     border-radius: 15px;
-    width: 310px;
+    width: 96%;
     margin: 5px;
 }
 
-.ce-chats-container{
+.ce-chats-container {
     background-color: black !important;
+    border: #555 solid !important;
     border-radius: 0px !important;
 }
 
-.ce-chat-list{
+.ce-chat-list {
     overflow: auto !important;
     background-color: black !important;
 }
@@ -40,10 +41,9 @@ Columna del chat
 Titulo
 */
 
-.ce-chat-title-container{
-    background-color: black !important;
+.ce-chat-title-container {
+    background-color: #222 !important;
     color: white !important;
-    opacity: 0.9;
     filter: alpha(opacity=90);
 }
 
@@ -53,11 +53,11 @@ Mensajes y su información en general
 
 .ce-message-bubble {
     color: #091833 !important;
-    background-color: #0ABDC6 !important;
+    background-color: #0abdc6 !important;
 }
 
 .ce-their-message-bubble {
-    color: #0ABDC6 !important;
+    color: #0abdc6 !important;
     background-color: #091833 !important;
 }
 
@@ -66,7 +66,7 @@ Mensajes y su información en general
 }
 
 .ce-message-date-text {
-    color: #0ABDC6 !important;
+    color: #0abdc6 !important;
 }
 
 .ce-chat-feed-container {
@@ -74,29 +74,30 @@ Mensajes y su información en general
 }
 
 .ce-send-button-container {
-    background-color: #EA00D9 !important;
+    background-color: #ea00d9 !important;
     color: black !important;
 }
 
 .ql-toolbar {
     background-color: black;
-    border-color: #0ABDC6 !important;
+    border-color: #0abdc6 !important;
 }
 
-.ql-container{
+.ql-container {
     background-color: black;
+    opacity: 0.9;
     color: white;
-    border-color: #0ABDC6 !important;
+    border-color: #0abdc6 !important;
 }
 
 /*
 Columna derecha
 */
 .ce-settings-column {
-    background-color: black !important;
+    background-color: #000 !important;
+    border: #555 solid !important;
     align-content: center !important;
 }
-
 
 /*
 Botones oscuros, led
@@ -118,10 +119,21 @@ Botones oscuros, led
 
 .glow-on-hover:before {
     content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
     position: absolute;
     top: -2px;
-    left:-2px;
+    left: -2px;
     background-size: 400%;
     z-index: -1;
     filter: blur(5px);
@@ -129,12 +141,12 @@ Botones oscuros, led
     height: calc(100% + 4px);
     animation: glowing 20s linear infinite;
     opacity: 0;
-    transition: opacity .3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     border-radius: 10px;
 }
 
 .glow-on-hover:active {
-    color: #000
+    color: #000;
 }
 
 .glow-on-hover:active:after {
@@ -158,7 +170,13 @@ Botones oscuros, led
 }
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
