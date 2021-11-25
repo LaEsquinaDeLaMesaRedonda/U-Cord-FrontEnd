@@ -4,149 +4,144 @@ import md5 from 'md5';
 /* https://chatengine.io/docs/backend
 https://axios-http.com/docs/post_example */
 
-export const chatEngineApiClient =( () =>{
+export const chatEngineApiClient = (() => {
     const URL = 'https://api.chatengine.io/';
     const PRIVATE_KEY = '434dfcfb-f05c-47c3-80b9-94ad38bed2f4';
-    const PROJECT_ID = 'f2835e2c-343d-4ab3-9944-7e92dc3c6e98'; 
+    const PROJECT_ID = 'f2835e2c-343d-4ab3-9944-7e92dc3c6e98';
 
-    const admin = {"username": "admin@escuelaing.edu.co", "contraseña" : "827ccb0eea8a706c4c34a16891f84e7b"};
+    const admin = {
+        username: 'admin@escuelaing.edu.co',
+        contraseña: '827ccb0eea8a706c4c34a16891f84e7b',
+    };
 
     const authHeader = {
         'PRIVATE-KEY': PRIVATE_KEY,
-    }
+    };
 
     const setData = user => {
-        const { correo, contraseña:password, nombreCompleto } = user;
-        const name = nombreCompleto.split(".");
-        
-        return {
-            "username": correo,
-            "secret": password,
-            "email": correo,
-            "first_name": name[0],
-            "last_name": name[1],
-        };
-    }
+        const { correo, contraseña: password, nombreCompleto } = user;
+        const name = nombreCompleto.split('.');
 
-    const getFile =async (url) =>{
-        const response = await fetch( url, {
-            mode: 'no-cors'            
+        return {
+            username: correo,
+            secret: password,
+            email: correo,
+            first_name: name[0],
+            last_name: name[1],
+        };
+    };
+
+    const getFile = async url => {
+        const response = await fetch(url, {
+            mode: 'no-cors',
         });
         const data = await response.blob();
 
-        return new File( [data], "userPhoto.png", {type: 'image/jpg'});
-          
-    }
+        return new File([data], 'userPhoto.png', { type: 'image/jpg' });
+    };
 
     return {
-        postUser : async user =>{
-            const data = setData( user );
-            
+        postUser: async user => {
+            const data = setData(user);
+
             var config = {
                 method: 'post',
-                url: URL+'users/',
+                url: URL + 'users/',
                 headers: authHeader,
-                data : data
+                data: data,
             };
 
-            await axios(config)
-                .then( response => {
-                    console.log(JSON.stringify(response.data));
-                });
-        },
-
-        getUser : async ( {email, password} ) => {
-            const auth0 = {
-                            'Project-ID': PROJECT_ID, 
-                            'User-Name': email.toString, 
-                            'User-Secret': md5(password).toString
-            };
-
-            await axios.get(`${URL}/chats`, {headers: auth0})
-                .then( response => {
-                    console.log(JSON.stringify(response.data));
-                });
-        },
-
-        darDeBaja : async (context, chat_id) =>{
-            var config = {
-                "url": `${URL}chats/${chat_id}/people/`,
-                "method": "PUT",
-                "timeout": 0,
-                "headers": {
-                    "Project-ID": PROJECT_ID,
-                    "User-Name": admin.username,
-                    "User-Secret": admin.contraseña
-                },
-                "data": {username: context.correo},
-            };
-
-            await axios(config)
-            .then( response => {
+            await axios(config).then(response => {
                 console.log(JSON.stringify(response.data));
-            });;
+            });
         },
-        getChatsByUser : async (context) => {
+
+        getUser: async ({ email, password }) => {
+            const auth0 = {
+                'Project-ID': PROJECT_ID,
+                'User-Name': email.toString,
+                'User-Secret': md5(password).toString,
+            };
+
+            await axios
+                .get(`${URL}/chats`, { headers: auth0 })
+                .then(response => {
+                    console.log(JSON.stringify(response.data));
+                });
+        },
+
+        darDeBaja: async (context, chat_id) => {
+            var config = {
+                url: `${URL}chats/${chat_id}/people/`,
+                method: 'PUT',
+                timeout: 0,
+                headers: {
+                    'Project-ID': PROJECT_ID,
+                    'User-Name': admin.username,
+                    'User-Secret': admin.contraseña,
+                },
+                data: { username: context.correo },
+            };
+
+            await axios(config).then(response => {
+                console.log(JSON.stringify(response.data));
+            });
+        },
+        getChatsByUser: async context => {
             const { correo, contraseña } = context;
             var settings = {
-                "url": `${URL}chats/`,
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
-                  "Project-ID": PROJECT_ID,
-                  "User-Name": correo,
-                  "User-Secret": contraseña
+                url: `${URL}chats/`,
+                method: 'GET',
+                timeout: 0,
+                headers: {
+                    'Project-ID': PROJECT_ID,
+                    'User-Name': correo,
+                    'User-Secret': contraseña,
                 },
-              };
-              await axios(settings)
-                .then( response => {
-                    console.log(JSON.stringify(response.data));
-                });
+            };
+            await axios(settings).then(response => {
+                console.log(JSON.stringify(response.data));
+            });
         },
 
-        updatePasswdByUser : async ( user, newPasswd ) => {
+        updatePasswdByUser: async (user, newPasswd) => {
             /* https://api.chatengine.io/users/me/*/
-            
+
             const { correo } = user;
-            
+
             var config = {
                 method: 'put',
-                url: URL+`users/`,
+                url: URL + `users/`,
                 headers: authHeader,
-                data : { username: "correo",secret: md5(newPasswd) },
+                data: { username: 'correo', secret: md5(newPasswd) },
             };
 
-            console.log(config);
-
-            await axios(config)
-                .then( response => {
-                    console.log(JSON.stringify(response.data));
-                });
-            }
-        ,
-        updatePictureByUser : async ( user, newURL ) => {
+            await axios(config).then(response => {
+                console.log(JSON.stringify(response.data));
+            });
+        },
+        updatePictureByUser: async (user, newURL) => {
             /* https://api.chatengine.io/users/me/*/
-            
+
             const { correo, contraseña } = user;
-            
+
             var config = {
                 method: 'patch',
-                url: URL+`users/me`,
+                url: URL + `users/me`,
                 headers: {
-                    "Project-ID": PROJECT_ID,
+                    'Project-ID': PROJECT_ID,
                     'PRIVATE-KEY': PRIVATE_KEY,
-                    "User-Name": correo,
-                    "User-Secret": contraseña
+                    'User-Name': correo,
+                    'User-Secret': contraseña,
                 },
-                data : { avatar: getFile(newURL)},
+                data: { avatar: getFile(newURL) },
             };
 
             console.log(config);
 
-            await axios(config)
-                .then( response => {
-                    console.log(JSON.stringify(response.data));
-                });
-            }
-        }
+            await axios(config).then(response => {
+                console.log(JSON.stringify(response.data));
+            });
+        },
+    };
 })();

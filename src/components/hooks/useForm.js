@@ -52,7 +52,11 @@ const useForm = (inputs, validate) => {
                                 icon: 'success',
                                 text: 'Usuario registrado',
                                 timer: '6000',
-                            }).then(() => (window.location.href = '/login'));
+                            }).then(() =>
+                                setTimeout(() => {
+                                    window.location.href = '/login';
+                                }, 4000),
+                            );
                         })
                         .catch(() =>
                             swal({
