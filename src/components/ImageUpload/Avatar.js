@@ -53,13 +53,12 @@ const Avatar = () => {
                         // esto solo funciona si estamos auth con firebase
                         uploadRef.put(croppedImage).then(() => {
                             uploadRef.getDownloadURL().then(url => {
-                                console.log('oas');
-                                console.log(url);
                                 fb.firestore
                                     .collection('chatUsers')
                                     .doc(correo)
                                     .update({ avatar: url })
                                     .then(() => {
+                                        user.url = url;
                                         setImage(null);
                                     });
                             });
