@@ -105,11 +105,17 @@ export const chatEngineApiClient =( () =>{
                     "User-Secret": admin.contraseña
                 },
             };
-
+            var ret = new Array();
             await axios(config)
             .then(response => {
-            return JSON.stringify(response.data);
+                response.data.map( it => {
+                    ret.push(it.person.username);
+                }
+                );
+                //console.log(Object.keys(response.data));//JSON.stringify(response.data));
+            console.log(ret);
             });
+        return ret;
         }
     }
     

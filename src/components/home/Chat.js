@@ -6,6 +6,8 @@ import "../../css/Chat.css";
 
 const Chat = () => {
 
+    var memberstable = document.getElementById('membersTable');
+
     const { user } = useContext(UserContext);
 
     const { activeChat } = useContext(ChatEngineContext);
@@ -22,15 +24,14 @@ const Chat = () => {
         window.alert("Función aun no implementada, lamentamos las molestias.");
     }
 
-    const sortMembers = () => {
-        const members = getMembers();
-        const list = members.map;
-        /*const list = members.person.map((member) => <li>member.userName</li>);
-        return list;*/
-    }
-    const getMembers = () => {
-        //chatEngineApiClient.getUsersByChat(user, activeChat);
-        return chatEngineApiClient.getUsersByChat(activeChat);
+    var getMembers = async function() {
+        const list = await chatEngineApiClient.getUsersByChat(activeChat);
+        list.map(us => {
+            const row = document.createElement('tr');
+            row.innerHTML=`
+                            <td>${us}</td>`;
+            memberstable.append(row);
+        })
     }
 
     return (
@@ -51,10 +52,21 @@ const Chat = () => {
                     <button
                     type = "button"
                     className = "glow-on-hover"
-                    onClick = {sortMembers} >
+                    onClick = {getMembers} >
                         Buscar sala de estudio.
                     </button>
+                <table id="membersTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Member username.
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                    </tbody>
+                </table>
                 <renderOptionsSettings>
 
                     <button
