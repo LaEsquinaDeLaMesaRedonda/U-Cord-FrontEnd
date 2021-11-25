@@ -4,6 +4,7 @@ import AppRouter from './components/routers/AppRouter';
 import { UserContext } from './context/UserContext';
 import { authReducer } from './components/auth/authReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'semantic-ui-css/semantic.min.css';
 
 function App() {
     const init = () => {

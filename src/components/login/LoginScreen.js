@@ -1,18 +1,21 @@
-import React from 'react'
+import React from 'react';
 import FormLogin from './FormLogin';
 
-const LoginScreen = ( ) => {
-
+const LoginScreen = () => {
     return (
         <>
-        <div className='form-container'>
-          <div className='form-content-left'>
-            <img className='form-img' src='img/img-2.svg' alt='spaceship' />
-          </div>
-          
-          <FormLogin />
-        </div>
-      </>
+            <div className="form-container">
+                <div className="form-content-left">
+                    <img
+                        className="form-img"
+                        src="img/img-2.svg"
+                        alt="spaceship"
+                    />
+                </div>
+
+                <FormLogin />
+            </div>
+        </>
     );
 };
 
