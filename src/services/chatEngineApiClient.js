@@ -113,7 +113,7 @@ export const chatEngineApiClient = (() => {
                 method: 'put',
                 url: URL + `users/`,
                 headers: authHeader,
-                data: { username: 'correo', secret: md5(newPasswd) },
+                data: { username: correo, secret: md5(newPasswd) },
             };
 
             await axios(config).then(response => {

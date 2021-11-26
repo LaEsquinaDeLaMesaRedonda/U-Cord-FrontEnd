@@ -21,7 +21,7 @@ const ImageUpload = ({
             user.url = fr.result;
         };
         fr.readAsDataURL(file);
-    }, [file]);
+    }, [file, user]);
     return (
         <Modal open={true}>
             <Modal.Header>{header}</Modal.Header>

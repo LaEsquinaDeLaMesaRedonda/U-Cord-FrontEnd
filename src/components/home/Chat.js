@@ -11,9 +11,9 @@ const Chat = () => {
 
     const { activeChat } = useContext(ChatEngineContext);
 
-    const getChats = () => {
+    /*     const getChats = () => {
         chatEngineApiClient.getChatsByUser(user);
-    };
+    }; */
 
     const salirChat = () => {
         if (

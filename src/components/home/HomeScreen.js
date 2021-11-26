@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { types } from '../types/types';
 import Chat from './Chat';
@@ -7,7 +7,7 @@ import { ChatEngineWrapper } from 'react-chat-engine';
 import { fb } from 'services';
 
 const HomeScreen = () => {
-    const { user, dispatch } = useContext(UserContext);
+    const { dispatch } = useContext(UserContext);
 
     const handleClick = () => {
         const action = {
