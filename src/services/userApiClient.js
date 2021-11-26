@@ -26,7 +26,7 @@ export const userApiclient = (() => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newUrl),
+                body: newUrl,
             });
             if (!response.ok) throw new Error('The response Failed');
         },

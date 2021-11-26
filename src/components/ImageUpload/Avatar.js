@@ -2,6 +2,7 @@ import { UserContext } from 'context/UserContext';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon, IconGroup, Image } from 'semantic-ui-react';
 import { fb } from 'services';
+import { userApiclient } from 'services/userApiClient';
 import ImageUpload from './ImageUpload';
 
 const Avatar = () => {
@@ -60,6 +61,10 @@ const Avatar = () => {
                                     .then(() => {
                                         user.url = url;
                                         setImage(null);
+                                        userApiclient.putUrlUser(
+                                            user.correo,
+                                            url,
+                                        );
                                     });
                             });
                         });
