@@ -23,7 +23,7 @@ const ImageUpload = ({
         fr.readAsDataURL(file);
     }, [file]);
     return (
-        <Modal dimmer="blurring" open={true}>
+        <Modal open={true}>
             <Modal.Header>{header}</Modal.Header>
             <Modal.Content image>
                 {crop ? (

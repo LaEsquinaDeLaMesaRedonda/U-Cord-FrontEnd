@@ -4,6 +4,7 @@ import { types } from '../types/types';
 import Chat from './Chat';
 import '../../css/Main.css';
 import { ChatEngineWrapper } from 'react-chat-engine';
+import { fb } from 'services';
 
 const HomeScreen = () => {
     const { user, dispatch } = useContext(UserContext);
@@ -12,6 +13,7 @@ const HomeScreen = () => {
         const action = {
             type: types.logout,
         };
+        fb.auth.signOut().catch();
         dispatch(action);
     };
 

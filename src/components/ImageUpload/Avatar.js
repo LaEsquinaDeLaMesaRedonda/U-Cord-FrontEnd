@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon, IconGroup, Image } from 'semantic-ui-react';
 import { fb } from 'services';
 import { userApiclient } from 'services/userApiClient';
+import swal from 'sweetalert';
 import ImageUpload from './ImageUpload';
 
 const Avatar = () => {
@@ -15,6 +16,36 @@ const Avatar = () => {
 
     const onFileAttach = file => {
         setImage(file);
+    };
+
+    const handleSubmit = croppedImage => {
+        const storageRef = fb.storage.ref();
+        const uploadRef = storageRef.child(`${correo}_avatar.jpg`);
+        fb.auth
+            .signInWithEmailAndPassword(user.correo, user.contraseña)
+            .then(res => {
+                console.log(res);
+            });
+        // esto solo funciona si estamos auth con firebase
+        uploadRef.put(croppedImage).then(() => {
+            uploadRef.getDownloadURL().then(url => {
+                fb.firestore
+                    .collection('chatUsers')
+                    .doc(correo)
+                    .update({ avatar: url })
+                    .then(() => {
+                        user.url = url;
+                        setImage(null);
+                        userApiclient.putUrlUser(user.correo, url);
+                    });
+            });
+            swal({
+                title: 'Actualizando',
+                icon: 'success',
+                text: 'Imagen Actualizada',
+                timer: '2000',
+            });
+        });
     };
 
     return (
@@ -38,37 +69,7 @@ const Avatar = () => {
                     file={image}
                     header="Escoge tu perfil"
                     mode="message"
-                    onSubmit={croppedImage => {
-                        const storageRef = fb.storage.ref();
-                        const uploadRef = storageRef.child(
-                            `${correo}_avatar.jpg`,
-                        );
-                        fb.auth
-                            .signInWithEmailAndPassword(
-                                user.correo,
-                                user.contraseña,
-                            )
-                            .then(res => {
-                                console.log(res);
-                            });
-                        // esto solo funciona si estamos auth con firebase
-                        uploadRef.put(croppedImage).then(() => {
-                            uploadRef.getDownloadURL().then(url => {
-                                fb.firestore
-                                    .collection('chatUsers')
-                                    .doc(correo)
-                                    .update({ avatar: url })
-                                    .then(() => {
-                                        user.url = url;
-                                        setImage(null);
-                                        userApiclient.putUrlUser(
-                                            user.correo,
-                                            url,
-                                        );
-                                    });
-                            });
-                        });
-                    }}
+                    onSubmit={handleSubmit}
                     handleClose={() => {
                         setImage(null);
                         window.location.href = '/main';
