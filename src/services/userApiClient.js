@@ -19,5 +19,16 @@ export const userApiclient = (() => {
                 return response.json();
             });
         },
+
+        putUrlUser: async (mail, newUrl) => {
+            const response = await fetch(`${URL}/U-cord/users/${mail}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUrl),
+            });
+            if (!response.ok) throw new Error('The response Failed');
+        },
     };
 })();
