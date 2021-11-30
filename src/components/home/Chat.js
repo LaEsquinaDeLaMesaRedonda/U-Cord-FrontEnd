@@ -1,33 +1,12 @@
-import { ChatEngine, ChatEngineContext } from 'react-chat-engine';
+import { ChatEngine } from 'react-chat-engine';
 import { UserContext } from '../../context/UserContext';
 import React, { useContext } from 'react';
-import { chatEngineApiClient } from '../../services/chatEngineApiClient';
 import '../../css/Chat.css';
 import ChatForm from '../ui/ChatForm';
-import Avatar from 'components/ImageUpload/Avatar';
+import ChatSettings from 'components/ui/ChatSettings';
 
 const Chat = () => {
     const { user } = useContext(UserContext);
-
-    const { activeChat } = useContext(ChatEngineContext);
-
-    /*     const getChats = () => {
-        chatEngineApiClient.getChatsByUser(user);
-    }; */
-
-    const salirChat = () => {
-        if (
-            window.confirm(
-                '¿Estas seguro de querer abandonar esta sala de chat?',
-            )
-        )
-            chatEngineApiClient.darDeBaja(user, activeChat);
-    };
-
-    const noImplementado = () => {
-        window.alert('Función aun no implementada, lamentamos las molestias.');
-    };
-
     return (
         <ChatEngine
             //Chat functionality options
@@ -39,40 +18,7 @@ const Chat = () => {
             height="88vh"
             renderNewChatForm={creds => <ChatForm key={1}> </ChatForm>}
             renderChatSettings={chatAppState => (
-                <div align="center">
-                    <br />
-                    <Avatar />
-                    <div>
-                        <button
-                            type="button"
-                            className="glow-on-hover"
-                            onClick={noImplementado}
-                        >
-                            Mi perfil.
-                        </button>
-                        <button
-                            type="button"
-                            className="glow-on-hover"
-                            onClick={noImplementado}
-                        >
-                            Mostrar integrantes.
-                        </button>
-                        <button
-                            type="button"
-                            className="glow-on-hover"
-                            onClick={noImplementado}
-                        >
-                            Buscar sala de estudio.
-                        </button>
-                        <button
-                            type="button"
-                            className="glow-on-hover"
-                            onClick={salirChat}
-                        >
-                            Salir del chat.
-                        </button>
-                    </div>
-                </div>
+                <ChatSettings key={2}></ChatSettings>
             )}
         />
     );
