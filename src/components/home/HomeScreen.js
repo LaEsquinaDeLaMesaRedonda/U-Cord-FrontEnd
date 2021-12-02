@@ -18,7 +18,7 @@ const HomeScreen = () => {
     };
 
     return (
-        <div>
+        <div className="main-container">
             <div className="flex-container">
                 <h1> Bienvenido a U-cord</h1>
                 <button

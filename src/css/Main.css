@@ -16,3 +16,7 @@
 .flex-container * {
     margin: 0 10px;
 }
+
+.main-container {
+    height: 100vh;
+}

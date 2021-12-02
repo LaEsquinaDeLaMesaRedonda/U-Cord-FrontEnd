@@ -120,28 +120,32 @@ export const chatEngineApiClient = (() => {
                 console.log(JSON.stringify(response.data));
             });
         },
-        updatePictureByUser: async (user, newURL) => {
+        updatePictureByUser: async (user, file) => {
             /* https://api.chatengine.io/users/me/*/
 
             const { correo, contraseña } = user;
-
+            console.log('actualizando');
             var config = {
-                method: 'patch',
-                url: URL + `users/me`,
+                method: 'PATCH',
+                url: URL + `users/146685`,
                 headers: {
                     'Project-ID': PROJECT_ID,
                     'PRIVATE-KEY': PRIVATE_KEY,
-                    'User-Name': correo,
-                    'User-Secret': contraseña,
+                    'User-Name': admin.username,
+                    'User-Secret': admin.contraseña,
                 },
-                data: { avatar: getFile(newURL) },
+                data: {
+                    avatar: null,
+                },
             };
 
             console.log(config);
 
-            await axios(config).then(response => {
-                console.log(JSON.stringify(response.data));
-            });
+            await axios(config)
+                .then(response => {
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(console.log);
         },
     };
 })();

@@ -1,4 +1,3 @@
-import InfoUser from 'components/home/InfoUser';
 import Avatar from 'components/ImageUpload/Avatar';
 import { UserContext } from 'context/UserContext';
 import React, { useContext } from 'react';
@@ -16,11 +15,12 @@ const ChatSettings = () => {
     };
 
     const noImplementado = () => {
-        window.alert('Función aun no implementada, lamentamos las molestias.');
+        console.log(user);
+        chatEngineApiClient.updatePictureByUser(user, user.url);
     };
 
     return (
-        <div align="center">
+        <div id="chat-setting-container" align="center">
             <br />
             <Avatar />
             <div>

@@ -180,3 +180,15 @@ Botones oscuros, led
         background-position: 0 0;
     }
 }
+
+.ce-chat-list-column,
+.ce-chat-feed-column,
+.ce-settings-column {
+    height: 100vh !important;
+}
+
+@media only screen and (max-width: 800px) {
+    .ce-settings-column {
+        display: none;
+    }
+}

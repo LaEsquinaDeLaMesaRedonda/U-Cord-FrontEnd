@@ -2,6 +2,7 @@ import { UserContext } from 'context/UserContext';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon, IconGroup, Image } from 'semantic-ui-react';
 import { fb } from 'services';
+import { chatEngineApiClient } from 'services/chatEngineApiClient';
 import { userApiclient } from 'services/userApiClient';
 import swal from 'sweetalert';
 import ImageUpload from './ImageUpload';
@@ -25,6 +26,8 @@ const Avatar = () => {
             .signInWithEmailAndPassword(user.correo, user.contraseña)
             .then(res => {
                 console.log(res);
+                console.log('file', image);
+                chatEngineApiClient.updatePictureByUser(user, image);
             });
         // esto solo funciona si estamos auth con firebase
         uploadRef.put(croppedImage).then(() => {
