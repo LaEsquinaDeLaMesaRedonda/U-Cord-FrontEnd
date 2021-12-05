@@ -121,26 +121,79 @@ export const chatEngineApiClient = (() => {
             });
         },
         updatePictureByUser: async (user, newURL) => {
-            /* https://api.chatengine.io/users/me/*/
+            /* https://api.chatengine.io/users/me/ */
 
-            const { correo, contraseña } = user;
-
+            var img = new Image();
+            img.src = 'https://firebasestorage.googleapis.com/v0/b/u-cord.appspot.com/o/test.test%40mail.escuelaing.edu.co_avatar.jpg?alt=media&token=c17546f1-b5e0-42a4-9e85-67b8663b8e6e';
             var config = {
                 method: 'patch',
-                url: URL + `users/me`,
-                headers: {
-                    'Project-ID': PROJECT_ID,
-                    'PRIVATE-KEY': PRIVATE_KEY,
-                    'User-Name': correo,
-                    'User-Secret': contraseña,
+                url: 'https://api.chatengine.io/users/me',
+                headers: { 
+                  'PRIVATE-KEY': '434dfcfb-f05c-47c3-80b9-94ad38bed2f4',
+                  'User-Name' : user.correo,
+                  'User-Secret' : user.contraseña
                 },
-                data: { avatar: getFile(newURL) },
-            };
+                data : {
+                    avatar : null
+                }
+              };
 
-            console.log(config);
+            axios(config)
+            .then(function (response) {
+            console.log(response.data);
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
 
-            await axios(config).then(response => {
+            /*await axios(config).then(response => {
                 console.log(JSON.stringify(response.data));
+            })
+            .catch(error => console.log('El error fue: ', error));*/
+        },
+
+        getChatByName: async (user, name) =>{
+            var config = {
+                method: 'put',
+                url: 'https://api.chatengine.io/chats/',
+                headers: { 
+                  'Project-ID': PROJECT_ID, 
+                  'User-Name': admin.username, 
+                  'User-Secret': admin.contraseña
+                },
+                data : {
+                    title : name
+                }
+              };
+            var chat_id;
+            axios(config)
+            .then(response => {
+                chat_id = response.data.id;
+                chatEngineApiClient.addUserToChat(user, chat_id);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        addUserToChat: async (user, chat_id) =>{
+            
+            var config = {
+                method: 'POST',
+                url: `https://api.chatengine.io/chats/${chat_id}/people/`,
+                headers: { 
+                  'Project-ID': PROJECT_ID, 
+                  'User-Name': admin.username, 
+                  'User-Secret': admin.contraseña
+                },
+                data : {username : user.correo}
+              };
+            axios(config)
+            .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+            console.log(error);
             });
         },
     };

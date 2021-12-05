@@ -18,6 +18,16 @@ const ChatSettings = () => {
     const noImplementado = () => {
         window.alert('Función aun no implementada, lamentamos las molestias.');
     };
+    
+    const addUserToChat = () => {
+        let siglas = prompt("Ingresa siglas de la materia.", "ARSW");
+        let chat_id;
+        if (siglas === null || siglas === ""){
+            chat_id = "Prompt cancelado";
+        }else{
+            chat_id = chatEngineApiClient.getChatByName(user, siglas);
+        }
+    };
 
     return (
         <div align="center">
@@ -35,7 +45,7 @@ const ChatSettings = () => {
                 <button
                     type="button"
                     className="glow-on-hover"
-                    onClick={noImplementado}
+                    onClick={addUserToChat}
                 >
                     Mostrar integrantes.
                 </button>
