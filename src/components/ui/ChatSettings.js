@@ -1,4 +1,3 @@
-import InfoUser from 'components/home/InfoUser';
 import Avatar from 'components/ImageUpload/Avatar';
 import { UserContext } from 'context/UserContext';
 import React, { useContext } from 'react';
@@ -21,11 +20,10 @@ const ChatSettings = () => {
     
     const addUserToChat = () => {
         let siglas = prompt("Ingresa siglas de la materia.", "ARSW");
-        let chat_id;
         if (siglas === null || siglas === ""){
-            chat_id = "Prompt cancelado";
+            console.log("Unable to create a request with an empty parameter.");
         }else{
-            chat_id = chatEngineApiClient.getChatByName(user, siglas);
+            chatEngineApiClient.getChatByName(user, siglas);
         }
     };
 
@@ -37,22 +35,14 @@ const ChatSettings = () => {
                 <button
                     type="button"
                     className="glow-on-hover"
-                    onClick={() => {}}
+                    onClick={noImplementado}
                 >
                     Mi perfil.
                 </button>
-
                 <button
                     type="button"
                     className="glow-on-hover"
                     onClick={addUserToChat}
-                >
-                    Mostrar integrantes.
-                </button>
-                <button
-                    type="button"
-                    className="glow-on-hover"
-                    onClick={noImplementado}
                 >
                     Buscar sala de estudio.
                 </button>
