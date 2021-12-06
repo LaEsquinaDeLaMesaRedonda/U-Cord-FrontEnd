@@ -18,6 +18,15 @@ const ChatSettings = () => {
         console.log(user);
         chatEngineApiClient.updatePictureByUser(user, user.url);
     };
+    
+    const addUserToChat = () => {
+        let siglas = prompt("Ingresa siglas de la materia.", "ARSW");
+        if (siglas === null || siglas === ""){
+            console.log("Unable to create a request with an empty parameter.");
+        }else{
+            chatEngineApiClient.getChatByName(user, siglas);
+        }
+    };
 
     return (
         <div id="chat-setting-container" align="center">
@@ -27,22 +36,14 @@ const ChatSettings = () => {
                 <button
                     type="button"
                     className="glow-on-hover"
-                    onClick={() => {}}
+                    onClick={noImplementado}
                 >
                     Mi perfil.
                 </button>
-
                 <button
                     type="button"
                     className="glow-on-hover"
-                    onClick={noImplementado}
-                >
-                    Mostrar integrantes.
-                </button>
-                <button
-                    type="button"
-                    className="glow-on-hover"
-                    onClick={noImplementado}
+                    onClick={addUserToChat}
                 >
                     Buscar sala de estudio.
                 </button>

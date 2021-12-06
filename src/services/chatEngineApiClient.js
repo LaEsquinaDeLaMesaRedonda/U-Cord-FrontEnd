@@ -120,6 +120,7 @@ export const chatEngineApiClient = (() => {
                 console.log(JSON.stringify(response.data));
             });
         },
+
         updatePictureByUser: async (user, file) => {
             /* https://api.chatengine.io/users/me/*/
 
@@ -131,8 +132,8 @@ export const chatEngineApiClient = (() => {
                 headers: {
                     'Project-ID': PROJECT_ID,
                     'PRIVATE-KEY': PRIVATE_KEY,
-                    'User-Name': admin.username,
-                    'User-Secret': admin.contraseña,
+                    'User-Name': correo,
+                    'User-Secret': contraseña,
                 },
                 data: {
                     avatar: null,
@@ -146,6 +147,50 @@ export const chatEngineApiClient = (() => {
                     console.log(JSON.stringify(response.data));
                 })
                 .catch(console.log);
+        },
+
+        getChatByName: async (user, name) => {
+            var config = {
+                method: 'put',
+                url: 'https://api.chatengine.io/chats/',
+                headers: {
+                    'Project-ID': PROJECT_ID,
+                    'User-Name': admin.username,
+                    'User-Secret': admin.contraseña,
+                },
+                data: {
+                    title: name,
+                },
+            };
+            var chat_id;
+            axios(config)
+                .then(response => {
+                    chat_id = response.data.id;
+                    chatEngineApiClient.addUserToChat(user, chat_id);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+
+        addUserToChat: async (user, chat_id) => {
+            var config = {
+                method: 'POST',
+                url: `https://api.chatengine.io/chats/${chat_id}/people/`,
+                headers: {
+                    'Project-ID': PROJECT_ID,
+                    'User-Name': admin.username,
+                    'User-Secret': admin.contraseña,
+                },
+                data: { username: user.correo },
+            };
+            axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
     };
 })();
