@@ -31,15 +31,6 @@ export const chatEngineApiClient = (() => {
         };
     };
 
-    const getFile = async url => {
-        const response = await fetch(url, {
-            mode: 'no-cors',
-        });
-        const data = await response.blob();
-
-        return new File([data], 'userPhoto.png', { type: 'image/jpg' });
-    };
-
     return {
         postUser: async user => {
             const data = setData(user);

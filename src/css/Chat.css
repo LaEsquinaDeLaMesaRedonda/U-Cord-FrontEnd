@@ -69,6 +69,32 @@ Mensajes y su información en general
     color: #0abdc6 !important;
 }
 
+.ce-person-text {
+    color: white !important;
+}
+
+#buttons-container div {
+    border-top: none !important;
+}
+
+.ce-person-container > div {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 5rem;
+}
+
+.ce-section-title-container {
+    color: #fff;
+    background: #111 !important;
+    border-radius: 10px;
+    width: 18rem;
+    margin: 5px;
+}
+
+.ce-person-title-container {
+    background: #111 !important;
+}
+
 .ce-chat-feed-container {
     background-color: black !important;
 }
@@ -190,5 +216,9 @@ Botones oscuros, led
 @media only screen and (max-width: 800px) {
     .ce-settings-column {
         display: none;
+    }
+
+    .ce-person-text {
+        color: #000 !important;
     }
 }
