@@ -23,9 +23,9 @@ const ChatSettings = () => {
     const addUserToChat = () => {
         let siglas = prompt('Ingresa siglas de la materia.', 'ARSW');
         if (siglas === null || siglas === '') {
-            console.log('Unable to create a request with an empty parameter.');
+            alert('Unable to create a request with an empty parameter.');
         } else {
-            chatEngineApiClient.getChatByName(user, siglas);
+            chatEngineApiClient.addUserToChat(user, siglas);
         }
     };
 

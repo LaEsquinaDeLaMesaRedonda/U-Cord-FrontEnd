@@ -73,31 +73,16 @@ export const chatEngineApiClient = (() => {
                 },
                 data: { username: context.correo },
             };
-
+            
             await axios(config).then(response => {
                 console.log(JSON.stringify(response.data));
             });
         },
-        getChatsByUser: async context => {
-            const { correo, contraseña } = context;
-            var settings = {
-                url: `${URL}chats/`,
-                method: 'GET',
-                timeout: 0,
-                headers: {
-                    'Project-ID': PROJECT_ID,
-                    'User-Name': correo,
-                    'User-Secret': contraseña,
-                },
-            };
-            await axios(settings).then(response => {
-                console.log(JSON.stringify(response.data));
-            });
-        },
 
+        
         updatePasswdByUser: async (user, newPasswd) => {
             /* https://api.chatengine.io/users/me/*/
-
+            
             const { correo } = user;
 
             var config = {
@@ -106,7 +91,7 @@ export const chatEngineApiClient = (() => {
                 headers: authHeader,
                 data: { username: correo, secret: md5(newPasswd) },
             };
-
+            
             await axios(config).then(response => {
                 console.log(JSON.stringify(response.data));
             });
@@ -114,7 +99,7 @@ export const chatEngineApiClient = (() => {
 
         updatePictureByUser: async (user, file) => {
             /* https://api.chatengine.io/users/me/*/
-
+            
             const { correo, contraseña } = user;
             console.log('actualizando');
             var config = {
@@ -130,58 +115,84 @@ export const chatEngineApiClient = (() => {
                     avatar: null,
                 },
             };
-
+            
             console.log(config);
 
             await axios(config)
-                .then(response => {
+            .then(response => {
                     console.log(JSON.stringify(response.data));
                 })
                 .catch(console.log);
-        },
+            },
 
-        getChatByName: async (user, name) => {
-            var config = {
-                method: 'put',
-                url: 'https://api.chatengine.io/chats/',
-                headers: {
-                    'Project-ID': PROJECT_ID,
-                    'User-Name': admin.username,
-                    'User-Secret': admin.contraseña,
-                },
-                data: {
-                    title: name,
-                },
-            };
-            var chat_id;
-            axios(config)
-                .then(response => {
-                    chat_id = response.data.id;
-                    chatEngineApiClient.addUserToChat(user, chat_id);
-                })
-                .catch(function (error) {
-                    console.log(error);
+            getChatsByUser: async (context, isAdmin) => {
+                var correo, contraseña;
+                if (isAdmin){
+                    correo = admin.username;
+                    contraseña = admin.contraseña;
+                }else{
+                    correo = context.correo;
+                    contraseña = context.contraseña;
+                }
+                var settings = {
+                    url: `${URL}chats/`,
+                    method: 'GET',
+                    timeout: 0,
+                    headers: {
+                        'Project-ID': PROJECT_ID,
+                        'User-Name': correo,
+                        'User-Secret': contraseña,
+                    },
+                };
+                var ids = [];
+                var titles = [];
+                await axios(settings).then(response => {
+                    response.data.map(chat => {
+                        ids.push(chat.id);
+                    })
                 });
-        },
+                return [ids, titles];
+            },
+        
+        addUserToChat: async (user, siglas) => {
 
-        addUserToChat: async (user, chat_id) => {
-            var config = {
-                method: 'POST',
-                url: `https://api.chatengine.io/chats/${chat_id}/people/`,
-                headers: {
-                    'Project-ID': PROJECT_ID,
-                    'User-Name': admin.username,
-                    'User-Secret': admin.contraseña,
-                },
-                data: { username: user.correo },
-            };
-            axios(config)
+            let mat = await chatEngineApiClient.getChatsByUser(null, true);
+
+            var ids = mat[0];
+            var tts = mat[1];
+
+            var index = -1;
+
+            for (var i = 0; i < tts.length; i++){
+                if (tts[i] === siglas){
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index !== -1){
+                var chat_id = ids[index]
+                var config = {
+                    method: 'POST',
+                    url: `https://api.chatengine.io/chats/${chat_id}/people/`,
+                    headers: {
+                        'Project-ID': PROJECT_ID,
+                        'User-Name': admin.username,
+                        'User-Secret': admin.contraseña,
+                    },
+                    data: { username: user.correo },
+                };
+                axios(config)
                 .then(function (response) {
-                    console.log(JSON.stringify(response.data));
+                console.log(JSON.stringify(response.data));
                 })
                 .catch(function (error) {
-                    console.log(error);
+                console.log(error);
                 });
+            }else{
+                alert("Siglas o id de chat no validos.");
+            }
         },
+        
     };
 })();
