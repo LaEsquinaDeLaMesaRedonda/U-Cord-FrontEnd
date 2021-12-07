@@ -45,6 +45,8 @@ export const chatEngineApiClient = (() => {
             await axios(config).then(response => {
                 console.log(JSON.stringify(response.data));
             });
+
+            chatEngineApiClient.addUserToChat({username: data.email}, "Bienvenido");
         },
 
         getUser: async ({ email, password }) => {
@@ -149,6 +151,7 @@ export const chatEngineApiClient = (() => {
                 await axios(settings).then(response => {
                     response.data.map(chat => {
                         ids.push(chat.id);
+                        titles.push(chat.title);
                     })
                 });
                 return [ids, titles];
@@ -180,7 +183,7 @@ export const chatEngineApiClient = (() => {
                         'User-Name': admin.username,
                         'User-Secret': admin.contraseña,
                     },
-                    data: { username: user.correo },
+                    data: { username: user.username },
                 };
                 axios(config)
                 .then(function (response) {
