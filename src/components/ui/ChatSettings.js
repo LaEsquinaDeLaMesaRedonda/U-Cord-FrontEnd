@@ -16,17 +16,13 @@ const ChatSettings = () => {
     };
 
     const noImplementado = () => {
-        console.log(user);
         chatEngineApiClient.updatePictureByUser(user, user.url);
     };
 
     const addUserToChat = () => {
-        let siglas = prompt('Ingresa siglas de la materia.', 'ARSW');
-        if (siglas === null || siglas === '') {
-            alert('Unable to create a request with an empty parameter.');
-        } else {
-            chatEngineApiClient.addUserToChat(user, siglas);
-        }
+        const siglas = prompt('Ingresa siglas de la materia.');
+        siglas && chatEngineApiClient.addUserToChat(user, siglas);
+        !siglas && alert('Debe ingresar una sigla.');
     };
 
     return (

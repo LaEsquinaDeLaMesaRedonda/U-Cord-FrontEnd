@@ -42,11 +42,11 @@ const ImageUpload = ({
                         <h1>{user.correo}</h1>
                         <p>
                             Hemos encontrado la siguiente imagen de avatar
-                            asociada a tu dirección de correo electrónico.
+                            asociada a tu usuario.
                         </p>
                         <b>
                             <i>
-                                <p>¿Está bien usar esta foto?</p>
+                                <p>¿Está bien actualizarlo con esta foto?</p>
                             </i>
                         </b>
                     </center>
