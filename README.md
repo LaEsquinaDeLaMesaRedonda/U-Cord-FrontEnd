@@ -32,6 +32,9 @@ npm start
 
 [![Deployed to Heroku](https://www.herokucdn.com/deploy/button.png)](https://ucord.herokuapp.com/login)
 
+## Más información
+Para conocer más sobre este proyecto, ingrese a [wiki U-Cord](https://github.com/LaEsquinaDeLaMesaRedonda/U-Cord/wiki)
+
 ## Autores
 
 -   [Ana Gabriela Silva](https://github.com/gabrielaasilva).
