@@ -1,6 +1,7 @@
+import InfoUser from 'components/home/InfoUser';
 import Avatar from 'components/ImageUpload/Avatar';
 import { UserContext } from 'context/UserContext';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { PeopleSettings } from 'react-chat-engine';
 import { ChatEngineContext } from 'react-chat-engine';
 import { chatEngineApiClient } from 'services/chatEngineApiClient';
@@ -8,6 +9,7 @@ import { chatEngineApiClient } from 'services/chatEngineApiClient';
 const ChatSettings = () => {
     const { user } = useContext(UserContext);
     const { activeChat } = useContext(ChatEngineContext);
+    const [myProfile, setMyProfile] = useState(false);
     const message = '¿Estas seguro de querer abandonar esta sala de chat?';
 
     const salirChat = () => {
@@ -15,14 +17,17 @@ const ChatSettings = () => {
             chatEngineApiClient.darDeBaja(user, activeChat);
     };
 
-    const noImplementado = () => {
-        chatEngineApiClient.updatePictureByUser(user, user.url);
+    const handleClick = () => {
+        setMyProfile(true);
     };
 
     const addUserToChat = () => {
         const siglas = prompt('Ingresa siglas de la materia.');
-        siglas && chatEngineApiClient.addUserToChat(user, siglas);
+        if (siglas == null) {
+            return;
+        }
         !siglas && alert('Debe ingresar una sigla.');
+        siglas && chatEngineApiClient.addUserToChat(user, siglas);
     };
 
     return (
@@ -33,10 +38,11 @@ const ChatSettings = () => {
                 <button
                     type="button"
                     className="glow-on-hover"
-                    onClick={noImplementado}
+                    onClick={handleClick}
                 >
                     Mi perfil.
                 </button>
+                {myProfile && <InfoUser setMyProfile={setMyProfile} />}
                 <button
                     type="button"
                     className="glow-on-hover"
