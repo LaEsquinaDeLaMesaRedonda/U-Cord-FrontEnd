@@ -48,8 +48,8 @@ export const chatEngineApiClient = (() => {
             });
 
             chatEngineApiClient.addUserToChat(
-                { username: email },
-                'Bienvenido',
+                { correo: email },
+                'Bienvenido'
             );
         },
 
